@@ -1,0 +1,35 @@
+.top-bar {
+  color: $primary;
+}
+li {
+  text-decoration: none;
+}
+.nav a:hover {
+  background-color: $primary;
+  color: $light;
+}
+
+.slider {
+  &__nav {
+    max-height: 400px;
+  }
+}
+.sub-input .btn {
+  border-color: $secondary;
+  color: $secondary;
+}
+
+@media (min-width: 1200px) {
+  .slider {
+    &__nav {
+      max-height: 450px;
+    }
+  }
+}
+@media (min-width: 1400px) {
+  .slider {
+    &__nav {
+      max-height: 500px;
+    }
+  }
+}

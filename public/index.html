@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <script
+      src="https://kit.fontawesome.com/b72c588ae5.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+  </head>
+  <body class="bg-light">
+    <header>
+      <section class="top-bar">
+        <div class="container mt-2">
+          <div class="row align-items-center">
+            <div class="col-lg-2 col-sm-4 col-4 mb-1">
+              <a href="index.html" class="navbar-brand">
+                <span class="fs-4 fw-semibold">ozerMobilya</span>
+              </a>
+            </div>
+            <div
+              class="col-lg-5 order-lg-last col-sm-8 col-8 mb-1 d-flex justify-content-end"
+            >
+              <button type="button" class="btn btn-primary mx-1">
+                <i class="fa-solid fa-user me-1"></i>
+                <span class="d-none d-sm-inline">Hakkımızda</span>
+              </button>
+              <button type="button" class="btn btn-primary mx-1">
+                <i class="fa-solid fa-heart me-1"></i>
+                <span class="d-none d-sm-inline">İletişim</span>
+              </button>
+              <button type="button" class="btn btn-primary mx-1">
+                <i class="fa-solid fa-cart-shopping me-1"></i>
+                <span class="d-none d-sm-inline">?</span>
+              </button>
+            </div>
+
+            <div class="col-lg-5 mb-1">
+              <form class="d-flex" role="search">
+                <div class="input-group">
+                  <input
+                    id="search-input"
+                    onkeyup="search()"
+                    type="search"
+                    placeholder="Aradığınız ürünü yazınız"
+                    class="form-control"
+                  />
+                  <button type="button" class="btn btn-primary">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <nav class="navbar navbar-dark navbar-expand-lg bg-primary">
+        <div class="container">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#category"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="category">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link ps-0 text-light"
+                  >Çocuk Odası</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="index.html" class="nav-link text-light">Yatak Odası</a>
+              </li>
+              <li class="nav-item">
+                <a href="index.html" class="nav-link text-light">Mutfak</a>
+              </li>
+              <li class="nav-item">
+                <a href="index.html" class="nav-link text-light">Yayın Odası</a>
+              </li>
+              <li class="nav-item">
+                <a href="index.html" class="nav-link text-light"
+                  >Oturma Odası</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="index.html" class="nav-link text-light">Ofis</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  href="index.html"
+                  class="nav-link dropdown-toggle text-light"
+                  role="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#dropdown"
+                  >Diğer Kategoriler</a
+                >
+                <ul class="dropdown-menu bg-primary" id="dropdown">
+                  <li>
+                    <a href="#" class="dropdown-item text-light">Banyo</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item text-light">Hol</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item text-light">Bahçe</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section class="slider mt-2">
+      <div class="container">
+        <main class="card w-100 shadow-sm">
+          <div class="row">
+            <aside class="col-lg-2 d-none d-lg-block">
+              <div
+                class="nav flex-column flex-nowrap p-1 overflow-auto slider__nav"
+              >
+                <a href="index.html" class="nav-link active">Elektronik</a>
+                <a href="#" class="nav-link">Moda</a>
+                <a href="#" class="nav-link">Kozmetik</a>
+                <a href="#" class="nav-link">Spor</a>
+                <a href="#" class="nav-link">Market</a>
+                <a href="#" class="nav-link">Kitap</a>
+                <a href="#" class="nav-link">Anne Bebek</a>
+                <a href="#" class="nav-link">Oyuncak</a>
+                <a href="#" class="nav-link">Mutfak</a>
+                <a href="#" class="nav-link">Giyim</a>
+                <a href="#" class="nav-link">Outdoor</a>
+                <a href="#" class="nav-link">Hırdavat</a>
+                <a href="#" class="nav-link">Eğitim</a>
+              </div>
+            </aside>
+            <div class="col-lg-10">
+              <div class="carousel slide" id="carousel" data-bs-ride="carousel">
+                <div class="carousel-inner p-2">
+                  <div class="carousel-item active">
+                    <img
+                      src="images/2.webp"
+                      alt="reklam"
+                      class="w-100 d-block img-fluid"
+                    />
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      src="images/mobile_20221129152230_yildizzz.webp"
+                      alt="reklam"
+                      class="w-100 d-block img-fluid"
+                    />
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      src="images/3.webp"
+                      alt="reklam"
+                      class="w-100 d-block img-fluid"
+                    />
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carousel"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carousel"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container my-3">
+        <h3>Ürünler</h3>
+      </div>
+      <div class="content__cards container my-3" id="product-list">
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+          <div class="col">
+            <div class="card shadow">
+              <b class="badge text-bg-primary w-50 m-2">İndirim</b>
+              <img src="images/product1.webp" alt="cam" />
+              <div class="card-body border-top text-truncate">
+                <a href="product1.html" class="card-title">
+                  Tp-Link Tapo C200 Full Hd 1080p Gece Görüşlü 128gb Micro Sd
+                  Destekli Wi-fi Kamera
+                </a>
+                <div class="price-wrap">
+                  <span>600,99 TL</span>
+                  <del>1.000 TL</del>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow">
+              <b class="badge text-bg-primary w-50 m-2">İndirim</b>
+              <img src="images/product2.webp" alt="cam" />
+              <div class="card-body border-top text-truncate">
+                <a href="#" class="card-title">
+                  Apple Yenilenmiş Iphone 11 128 Gb Beyaz MHDJ3TU/A
+                </a>
+                <div class="price-wrap">
+                  <span>16.099 TL</span>
+                  <del>18.099 TL</del>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow">
+              <b class="badge text-bg-primary w-50 m-2">İndirim</b>
+              <img src="images/product3.webp" alt="cam" />
+              <div class="card-body border-top text-truncate">
+                <a href="#" class="card-title">
+                  Philips Airfryer Xxl Hd9650/90 Avance Collection Fritöz
+                  22-11-109-000112
+                </a>
+                <div class="price-wrap">
+                  <span>6.849 TL</span>
+                  <del>7.500 TL</del>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow">
+              <b class="badge text-bg-primary w-50 m-2">İndirim</b>
+              <img src="images/product4.webp" alt="cam" />
+              <div class="card-body border-top text-truncate">
+                <a href="#" class="card-title">
+                  Philips Speedpro Max Xc7043 01 Elektrikli Süpürge 918950
+                </a>
+                <div class="price-wrap">
+                  <span>6.149 TL</span>
+                  <del>7.000 TL</del>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow">
+              <b class="badge text-bg-primary w-50 m-2">İndirim</b>
+              <img src="images/product5.webp" alt="cam" />
+              <div class="card-body border-top text-truncate">
+                <a href="#" class="card-title">
+                  DJI Avata Pro View Combo Drone 1223453
+                </a>
+                <div class="price-wrap">
+                  <span>35.500 TL</span>
+                  <del>41.200 TL</del>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow">
+              <b class="badge text-bg-primary w-50 m-2">İndirim</b>
+              <img src="images/product6.webp" alt="cam" />
+              <div class="card-body border-top text-truncate">
+                <a href="#" class="card-title">
+                  XDrive 15'li Profesyonel Oyuncu Koltuğu Kırmızı/siyah
+                  XD-15-K/S
+                </a>
+                <div class="price-wrap">
+                  <span>3.865,99 TL</span>
+                  <del>3.991 TL</del>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow">
+              <b class="badge text-bg-primary w-50 m-2">İndirim</b>
+              <img src="images/product7.webp" alt="cam" />
+              <div class="card-body border-top text-truncate">
+                <a href="#" class="card-title">
+                  adidas Terrex Daroga Plus H.rdy HP8634
+                </a>
+                <div class="price-wrap">
+                  <span>1.999,90 TL</span>
+                  <del>2.119,90 TL</del>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow">
+              <b class="badge text-bg-primary w-50 m-2">İndirim</b>
+              <img src="images/product8.webp" alt="cam" />
+              <div class="card-body border-top text-truncate">
+                <a href="#" class="card-title">
+                  Lambadar Rustik Retro Model Geometrik Sarkıt Metal Küp Avize
+                  LMBDR35281
+                </a>
+                <div class="price-wrap">
+                  <span>99,80 TL</span>
+                  <del>120,90 TL</del>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer container-fluid bg-primary">
+      <div class="container bg-primary py-3">
+        <div class="row g-3">
+          <div class="col-lg-4">
+            <div class="input-group sub-input">
+              <input type="text" class="form-control" placeholder="E-mail" />
+              <div class="btn btn-primary">Üye Ol</div>
+            </div>
+          </div>
+          <div class="col-lg-8 text-center text-lg-end">
+            <nav class="footer__socials">
+              <a href="#" class="btn btn-primary btn-outline-secondary">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="#" class="btn btn-primary btn-outline-secondary">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="#" class="btn btn-primary btn-outline-secondary">
+                <i class="fa-brands fa-twitter"></i>
+              </a>
+              <a href="#" class="btn btn-primary btn-outline-secondary">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+            </nav>
+          </div>
+          <div class="col-12">
+            <p class="text-light text-center">@2023 Tüm Hakları Saklıdır</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="app.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
