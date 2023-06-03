@@ -85,6 +85,8 @@ function init() {
   document.addEventListener("touchend", onTouchEnd, false);
   document.addEventListener("touchmove", onTouchMove, false);
 }
+var touchDown, touchX, touchY, deltaX, deltaY;
+
 function onMouseDown(event) {
   event.preventDefault();
   mouseDown = true;
@@ -110,24 +112,47 @@ function onMouseMove(event) {
   lastMouseX = event.clientX;
 }
 function onTouchStart(event) {
-  event.preventDefault();
-  mouseDown = true;
-  lastMouseX = event.touches[0].clientX;
+  // event.preventDefault();
+  // mouseDown = true;
+  // lastMouseX = event.touches[0].clientX;
+  // e.preventDefault();
+  touchDown = true;
+  touchX = event.touches[0].pageX;
+  touchY = event.touches[0].pageY;
 }
 
 function onTouchEnd(event) {
-  event.preventDefault();
-  mouseDown = false;
+  // event.preventDefault();
+  // mouseDown = false;
+  // e.preventDefault();
+  touchDown = false;
 }
 
 function onTouchMove(event) {
-  event.preventDefault();
-  if (!mouseDown) return;
+  // event.preventDefault();
+  // if (!mouseDown) return;
 
-  var deltaX = event.touches[0].clientX - lastMouseX;
-  model.rotation.y += deltaX * rotationSpeed;
+  // var deltaX = event.touches[0].clientX - lastMouseX;
+  // model.rotation.y += deltaX * rotationSpeed;
 
-  lastMouseX = event.touches[0].clientX;
+  // lastMouseX = event.touches[0].clientX;
+  // e.preventDefault();
+
+  if (!touchDown) {
+    return;
+  }
+
+  deltaX = event.touches[0].pageX - touchX;
+  deltaY = event.touches[0].pageY - touchY;
+  touchX = event.touches[0].pageX;
+  touchY = event.touches[0].pageY;
+
+  rotateObject();
+}
+function rotateObject() {
+  if (model && reticle.visible) {
+    model.rotation.y += deltaX / 100;
+  }
 }
 function addReticle() {
   const geometry = new THREE.RingBufferGeometry(0.15, 0.2, 32).rotateX(
@@ -144,7 +169,7 @@ async function addModel() {
   const loader = new THREE.GLTFLoader();
   const gltf = await loader.loadAsync(modelUrl);
   model = gltf.scene;
-  model.scale.multiplyScalar(2);
+  model.scale.multiplyScalar(1);
   model.visible = false;
   scene.add(model);
 }
