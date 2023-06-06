@@ -58,9 +58,6 @@ function init() {
 
   addReticle();
   addModel();
-  controller = renderer.xr.getController(0);
-  controller.addEventListener("select", onSelect);
-  scene.add(controller);
 
   // var light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 4);
   // light.position.set(0.5, 1, 0.25);
@@ -69,11 +66,21 @@ function init() {
   // const light = new THREE.AmbientLight(0x404040, 15); // soft white light
   // scene.add(light);
 
-  const button = ARButton.createButton(renderer, {
+  let features = {
     requiredFeatures: ["hit-test"],
-  });
-  document.body.appendChild(button);
-  renderer.domElement.style.display = "none";
+    optionalFeatures: ["dom-overlay"],
+  };
+
+  features.domOverlay = { root: document.getElementById("btnContainer") };
+  const button = document.body.appendChild(
+    ARButton.createButton(renderer, features)
+  );
+  renderer.domElement.classList.add("startArBtn");
+  // const button = ARButton.createButton(renderer, {
+  //   requiredFeatures: ["hit-test"],
+  // });
+  // document.body.appendChild(button);
+  // renderer.domElement.style.display = "none";
 
   window.addEventListener("resize", onWindowResize, false);
 
@@ -154,6 +161,7 @@ function rotateObject() {
     model.rotation.y += deltaX / 100;
   }
 }
+
 function addReticle() {
   const geometry = new THREE.RingBufferGeometry(0.15, 0.2, 32).rotateX(
     -Math.PI / 2
@@ -163,6 +171,15 @@ function addReticle() {
   reticle.matrixAutoUpdate = false;
   reticle.visible = false;
   scene.add(reticle);
+}
+document.querySelector("#placeBtn").addEventListener("touchstart", placeModel);
+function placeModel() {
+  console.log("clicked");
+  if (reticle.visible && model) {
+    model.visible = true;
+    model.position.setFromMatrixPosition(reticle.matrix);
+    model.quaternion.setFromRotationMatrix(reticle.matrix);
+  }
 }
 async function addModel() {
   const modelUrl = "armchair/scene.gltf";
@@ -174,14 +191,17 @@ async function addModel() {
   scene.add(model);
 }
 
-function onSelect() {
-  console.log("clicked");
-  if (reticle.visible && model) {
-    model.visible = true;
-    model.position.setFromMatrixPosition(reticle.matrix);
-    model.quaternion.setFromRotationMatrix(reticle.matrix);
-  }
-}
+// function onSelect() {
+//   console.log("clicked");
+//   if (reticle.visible && model) {
+//     model.visible = true;
+//     model.position.setFromMatrixPosition(reticle.matrix);
+//     model.quaternion.setFromRotationMatrix(reticle.matrix);
+//   }
+// }
+// controller = renderer.xr.getController(0);
+// controller.addEventListener("select", onSelect);
+// scene.add(controller);
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -227,10 +247,12 @@ function render(timestamp, frame) {
       if (hitTestResults.length > 0) {
         const hit = hitTestResults[0];
         const pose = hit.getPose(localSpace);
+        document.getElementById("placeBtn").style.display = "block";
         reticle.visible = true;
         reticle.matrix.fromArray(pose.transform.matrix);
       } else {
         reticle.visible = false;
+        document.getElementById("placeBtn").style.display = "none";
       }
     }
 

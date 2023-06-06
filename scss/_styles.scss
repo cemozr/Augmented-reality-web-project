@@ -29,6 +29,31 @@ li {
   border-color: $secondary;
   color: $secondary;
 }
+#placeBtn {
+  bottom: 100px;
+  display: none;
+  position: absolute;
+  left: calc(50% - 20vw);
+  background-color: $primary;
+  color: $secondary;
+  width: 40vw;
+  border-radius: 25px;
+  border: 1px solid;
+  font-weight: bold;
+}
+.startArBtn {
+  background-color: $primary;
+  color: white;
+  font-weight: bold;
+}
+
+#modelViewer {
+  position: absolute;
+  left: calc(50% - 40vw);
+  margin-top: 10vh;
+  width: 80vw;
+  height: 80vh;
+}
 
 @media (min-width: 1200px) {
   .slider {
