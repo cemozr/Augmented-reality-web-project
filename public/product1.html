@@ -32,10 +32,6 @@
                 <i class="text-light fa-solid fa-heart me-1"></i>
                 <span class="text-light d-none d-sm-inline">İletişim</span>
               </button>
-              <button type="button" class="btn btn-primary mx-1">
-                <i class="text-light fa-solid fa-cart-shopping me-1"></i>
-                <span class="text-light d-none d-sm-inline">?</span>
-              </button>
             </div>
 
             <div class="col-lg-5 mb-1">
@@ -136,19 +132,26 @@
                   Doloribus explicabo cum accusantium molestiae sit voluptatem!
                 </p>
 
-                <h6 class="text-primary d-inline">
+                <h6 class="qr-txt text-primary">
                   Artırılmış gerçeklik deneyimi ile ürünü evinizde görmek için
-                  butona tıklayabilir veya QR kodu okutabilirsiniz!
+                  QR kodu okutabilirsiniz!
+                </h6>
+                <h6 class="btn-txt text-primary">
+                  Artırılmış gerçeklik deneyimi ile ürünü evinizde görmek için
+                  aşağıdaki butona tıklayabilirsiniz!
                 </h6>
               </div>
 
               <div
                 class="img-wrapper mt-2 d-flex justify-content-around align-items-center"
               >
-                <a class="btn btn-lg w-25 btn-primary me-2" href="4.model.html"
+                <a
+                  class="btn btn-lg w-100 btn-primary me-2"
+                  id="mobileBtn"
+                  href="4.model.html"
                   ><i class="text-light fa-solid fa-vr-cardboard"> </i
                 ></a>
-                <img src="images/asd.png" class="w-50" alt="" />
+                <img src="images/asd.png" class="w-50" id="qrCode" alt="" />
               </div>
             </div>
           </div>
@@ -205,33 +208,21 @@
     </section>
     <section class="footer mt-4 fixed-bottom container-fluid bg-primary">
       <div class="container bg-primary py-3">
-        <div class="row g-3">
-          <div class="col-lg-4">
-            <div class="input-group sub-input">
-              <input type="text" class="form-control" placeholder="E-mail" />
-              <div class="btn btn-primary">Üye Ol</div>
-            </div>
-          </div>
-          <div class="col-lg-8 text-center text-lg-end">
-            <nav class="footer__socials">
-              <a href="#" class="btn btn-primary btn-outline-secondary">
-                <i class="fa-brands fa-facebook-f"></i>
-              </a>
-              <a href="#" class="btn btn-primary btn-outline-secondary">
-                <i class="fa-brands fa-instagram"></i>
-              </a>
-              <a href="#" class="btn btn-primary btn-outline-secondary">
-                <i class="fa-brands fa-twitter"></i>
-              </a>
-              <a href="#" class="btn btn-primary btn-outline-secondary">
-                <i class="fa-brands fa-youtube"></i>
-              </a>
-            </nav>
-          </div>
-          <div class="col-12">
-            <p class="text-light text-center">@2023 Tüm Hakları Saklıdır</p>
-          </div>
-        </div>
+        <nav class="footer__socials text-center mb-2">
+          <a href="#" class="btn btn-primary btn-outline-secondary">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="#" class="btn btn-primary btn-outline-secondary">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="#" class="btn btn-primary btn-outline-secondary">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="#" class="btn btn-primary btn-outline-secondary">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+        </nav>
+        <p class="text-light text-center">@2023 Tüm Hakları Saklıdır</p>
       </div>
     </section>
     <script src="../app.js"></script>

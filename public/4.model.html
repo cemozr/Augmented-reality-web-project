@@ -24,18 +24,43 @@
     <script type="module" src="../app.js"></script>
   </head>
 
-  <body class="bg-light">
+  <body class="bg-light w-100">
     <div class="viewerWrapper">
       <model-viewer
         id="modelViewer"
-        alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
+        alt="armchair"
         src="armchair/scene.gltf"
         shadow-intensity="1"
         camera-controls
         touch-action="pan-y"
-      ></model-viewer>
+      >
+        <h6
+          id="waitModelTxt"
+          class="bg-primary text-secondary mt-2 text-center"
+        >
+          Lütfen 3B Model Yüklenene Kadar Bekleyiniz.
+        </h6>
+        <h6
+          id="startArTxt"
+          class="bg-primary text-secondary mt-2 text-center d-none"
+        >
+          Artırılmış Gerçeklik Oturumunu Başlatmak İçin Butona Tıklayınız.
+        </h6>
+        <h6
+          id="controlModelTxt"
+          class="bg-primary text-secondary mt-2 text-center d-none"
+        >
+          Modeli Kontrol Etmek İçin Dokunarak Sürükleyiniz.
+        </h6>
+      </model-viewer>
     </div>
     <div id="btnContainer">
+      <div id="ar-txt">
+        <h5>
+          Lütfen İşaretçi Açığa Çıkana Kadar Kameranızı Zeminde Gezdiriniz!
+        </h5>
+      </div>
+
       <button type="button" id="placeBtn">YERLEŞTİR</button>
     </div>
     <script

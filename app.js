@@ -1,24 +1,3 @@
-const search = () => {
-  const searchInput = document
-    .getElementById("search-input")
-    .value.toUpperCase();
-  const productList = document.getElementById("product-list");
-  const product = document.querySelectorAll(".card");
-  const productName = document.getElementsByTagName("a");
-
-  for (var i = 0; i < productName.length; i++) {
-    let match = product[i].getElementsByTagName("a")[1];
-    if (match) {
-      let searchValue = match.textContent || match.innerHTML;
-      if (searchValue.toUpperCase().indexOf(searchInput) > -1) {
-        product[i].style.display = "";
-      } else {
-        product[i].style.display = "none";
-      }
-    }
-  }
-};
-
 import { ARButton } from "https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js";
 
 let camera, scene, renderer;
@@ -30,6 +9,14 @@ var mouseDown = false;
 var lastMouseX = null;
 var lastMouseY = null;
 var rotationSpeed = 0.02;
+
+setTimeout(function () {
+  document.getElementById("waitModelTxt").className += " hidden";
+  document.getElementById("startArTxt").className -= " d-none";
+  document.getElementById("startArTxt").className += " block";
+  document.getElementById("controlModelTxt").className -= " d-none";
+  document.getElementById("controlModelTxt").className += " block";
+}, 5000);
 
 init();
 animate();
@@ -50,7 +37,7 @@ function init() {
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.xr.enabled = true; // we have to enable the renderer for webxr
+  renderer.xr.enabled = true;
   container.appendChild(renderer.domElement);
 
   const directionalLight = new THREE.DirectionalLight(0xffffff, 4.5);
@@ -58,13 +45,6 @@ function init() {
 
   addReticle();
   addModel();
-
-  // var light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 4);
-  // light.position.set(0.5, 1, 0.25);
-  // scene.add(light);
-
-  // const light = new THREE.AmbientLight(0x404040, 15); // soft white light
-  // scene.add(light);
 
   let features = {
     requiredFeatures: ["hit-test"],
@@ -76,11 +56,6 @@ function init() {
     ARButton.createButton(renderer, features)
   );
   renderer.domElement.classList.add("startArBtn");
-  // const button = ARButton.createButton(renderer, {
-  //   requiredFeatures: ["hit-test"],
-  // });
-  // document.body.appendChild(button);
-  // renderer.domElement.style.display = "none";
 
   window.addEventListener("resize", onWindowResize, false);
 
@@ -97,7 +72,6 @@ var touchDown, touchX, touchY, deltaX, deltaY;
 function onMouseDown(event) {
   event.preventDefault();
   mouseDown = true;
-  // lastMouseY = event.clientY;
   lastMouseX = event.clientX;
 }
 
@@ -109,42 +83,21 @@ function onMouseUp(event) {
 function onMouseMove(event) {
   event.preventDefault();
   if (!mouseDown) return;
-  // var deltaY = event.clientY - lastMouseY;
   let deltaX = event.clientX - lastMouseX;
-
-  // model.rotation.x += deltaY * rotationSpeed;
   model.rotation.y += deltaX * rotationSpeed;
-
-  // lastMouseY = event.clientY;
   lastMouseX = event.clientX;
 }
 function onTouchStart(event) {
-  // event.preventDefault();
-  // mouseDown = true;
-  // lastMouseX = event.touches[0].clientX;
-  // e.preventDefault();
   touchDown = true;
   touchX = event.touches[0].pageX;
   touchY = event.touches[0].pageY;
 }
 
 function onTouchEnd(event) {
-  // event.preventDefault();
-  // mouseDown = false;
-  // e.preventDefault();
   touchDown = false;
 }
 
 function onTouchMove(event) {
-  // event.preventDefault();
-  // if (!mouseDown) return;
-
-  // var deltaX = event.touches[0].clientX - lastMouseX;
-  // model.rotation.y += deltaX * rotationSpeed;
-
-  // lastMouseX = event.touches[0].clientX;
-  // e.preventDefault();
-
   if (!touchDown) {
     return;
   }
@@ -191,18 +144,6 @@ async function addModel() {
   scene.add(model);
 }
 
-// function onSelect() {
-//   console.log("clicked");
-//   if (reticle.visible && model) {
-//     model.visible = true;
-//     model.position.setFromMatrixPosition(reticle.matrix);
-//     model.quaternion.setFromRotationMatrix(reticle.matrix);
-//   }
-// }
-// controller = renderer.xr.getController(0);
-// controller.addEventListener("select", onSelect);
-// scene.add(controller);
-
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -242,17 +183,18 @@ function render(timestamp, frame) {
     }
     if (hitTestSourceInitialized) {
       const hitTestResults = frame.getHitTestResults(hitTestSource);
-      // console.log(hitTestResults);
 
       if (hitTestResults.length > 0) {
         const hit = hitTestResults[0];
         const pose = hit.getPose(localSpace);
         document.getElementById("placeBtn").style.display = "block";
+        document.getElementById("ar-txt").style.display = "none";
         reticle.visible = true;
         reticle.matrix.fromArray(pose.transform.matrix);
       } else {
         reticle.visible = false;
         document.getElementById("placeBtn").style.display = "none";
+        document.getElementById("ar-txt").style.display = "block";
       }
     }
 

@@ -37,14 +37,36 @@ li {
   background-color: $primary;
   color: $secondary;
   width: 40vw;
+  height: 5vh;
   border-radius: 25px;
   border: 1px solid;
   font-weight: bold;
 }
+#ar-txt {
+  top: 100px;
+  display: none;
+  position: absolute;
+
+  h5 {
+    text-align: center;
+    color: $secondary;
+    text-shadow: 1px 1.5px $primary;
+  }
+}
+
 .startArBtn {
   background-color: $primary;
-  color: white;
-  font-weight: bold;
+}
+#ARButton {
+  color: white !important;
+  opacity: 1 !important;
+  font-weight: bold !important;
+  border-color: $danger !important;
+  bottom: 50px !important;
+  box-shadow: 1px 1px 4px $danger !important;
+}
+#ARButton:hover {
+  box-shadow: 5px 5px $danger !important;
 }
 
 #modelViewer {
@@ -53,6 +75,30 @@ li {
   margin-top: 10vh;
   width: 80vw;
   height: 80vh;
+}
+.hidden {
+  display: none;
+}
+.block {
+  display: block;
+}
+#waitModelTxt {
+  text-shadow: 1px 1.5px $danger;
+}
+#startArTxt {
+  color: $secondary;
+  text-shadow: 1px 1.5px $danger;
+  margin-bottom: 0px;
+  text-align: center;
+}
+#controlModelTxt {
+  color: $secondary;
+  text-shadow: 1px 1.5px $danger;
+  margin-bottom: 0px;
+  text-align: center;
+  position: absolute;
+  bottom: 100px;
+  left: calc(50% - 150px);
 }
 
 @media (min-width: 1200px) {
@@ -73,5 +119,21 @@ li {
     &__nav {
       max-height: 500px;
     }
+  }
+}
+@media (max-width: 768px) {
+  #qrCode {
+    display: none;
+  }
+  .qr-txt {
+    display: none;
+  }
+}
+@media (min-width: 769px) {
+  #mobileBtn {
+    display: none;
+  }
+  .btn-txt {
+    display: none;
   }
 }
